@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HopeWorks Foundation</title>
+  <style>
+    :root {
+      --primary: #1e88e5;
+      --primary-dark: #1565c0;
+      --bg: #f7f9fc;
+      --text: #1f2a44;
+      --muted: #5a6b8c;
+      --card: #ffffff;
+      --accent: #15c08a;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif; color: var(--text); background: var(--bg); }
+    a { color: var(--primary); text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* Layout */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: #fff; border-bottom: 1px solid #e5eaf0;
+      backdrop-filter: saturate(180%) blur(6px);
+    }
+    .nav {
+      max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem;
+    }
+    .brand { display: flex; align-items: center; gap: 0.75rem; font-weight: 700; color: var(--primary-dark); }
+    .brand img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+    .menu { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .menu a { font-weight: 600; color: var(--muted); }
+    .menu a:hover { color: var(--primary-dark); }
+
+    .hero {
+      position: relative; overflow: hidden; background: #0e2a47; color: #fff;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; align-items: center; padding: 3rem 1rem;
+    }
+    .hero h1 { font-size: clamp(1.8rem, 3vw, 3rem); margin: 0 0 0.75rem; }
+    .hero p { margin: 0 0 1.25rem; color: #cfe1ff; }
+    .hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.7rem 1rem; border-radius: 10px; font-weight: 700; border: 2px solid transparent; cursor: pointer;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline { background: transparent; color: #fff; border-color: #6fa8ff; }
+    .btn-outline:hover { background: #173a63; }
+
+    .hero img {
+      width: 100%; height: 100%; border-radius: 14px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    section { padding: 3rem 1rem; }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      font-size: clamp(1.4rem, 2vw, 2rem); margin: 0 0 1rem; color: var(--primary-dark);
+    }
+    .muted { color: var(--muted); }
+
+    /* Cards and grids */
+    .grid { display: grid; gap: 1rem; }
+    @media (min-width: 700px) {
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    }
+    .card {
+      background: var(--card); border: 1px solid #e5eaf0; border-radius: 14px; padding: 1rem; box-shadow: 0 4px 14px rgba(17, 24, 39, 0.06);
+    }
+    .card h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+    .chip {
+      display: inline-block; padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.75rem; background: #eef5ff; color: var(--primary-dark); border: 1px solid #d6e6ff;
+    }
+
+    /* Donation */
+    .donate-form { display: grid; gap: 0.75rem; }
+    .field { display: grid; gap: 0.3rem; }
+    .field label { font-weight: 600; font-size: 0.9rem; color: var(--muted); }
+    .field input, .field select, .field textarea {
+      padding: 0.65rem 0.75rem; border: 1px solid #d6dde7; border-radius: 10px; font-size: 1rem; background: #fff;
+    }
+    .secure-note { font-size: 0.85rem; color: var(--muted); }
+    .note { background: #fff9e6; border: 1px solid #ffecb3; color: #8a6d3b; padding: 0.75rem; border-radius: 10px; }
+
+    /* Volunteer */
+    .vol-list { display: grid; gap: 0.75rem; }
+    .vol-item { display: flex; gap: 0.75rem; align-items: flex-start; }
+    .vol-item .icon {
+      width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center; background: #eaf7f2; color: #0b8b62; font-weight: 800;
+    }
+
+    /* Footer */
+    footer { background: #0f172a; color: #cbd5e1; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; gap: 1.25rem; padding: 2rem 1rem; }
+    @media (min-width: 700px) { .footer-inner { grid-template-columns: 2fr 1fr 1fr; } }
+    .footer-brand { font-weight: 700; color: #e2e8f0; }
+    .small { font-size: 0.9rem; }
+    .subtle { color: #8ea3b6; }
+    .footer-bar {
+      border-top: 1px solid #233044; padding: 1rem; text-align: center; font-size: 0.85rem; color: #8ea3b6;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="nav">
+      <div class="brand">
+        <img src="hero.jpg" alt="HopeWorks logo thumbnail" />
+        HopeWorks Foundation
+      </div>
+      <div class="menu">
+        <a href="#mission">Mission</a>
+        <a href="#events">Events</a>
+        <a href="#donate">Donate</a>
+        <a href="#volunteer">Volunteer</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1>We turn compassion into action</h1>
+        <p>Together, we empower communities with education, healthcare access, and sustainable livelihoods. Your support makes tangible change possible.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#donate">Donate now</a>
+          <a class="btn btn-outline" href="#volunteer">Become a volunteer</a>
+        </div>
+      </div>
+      <div>
+        <!-- Picture 1 -->
+        <img src="hero.jpg" alt="Community members participating in a workshop" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section id="mission">
+    <div class="wrap">
+      <h2 class="section-title">Our mission</h2>
+      <p class="muted">We exist to reduce barriers to opportunity. We partner with local leaders to deliver programs in education, health, and climate resilience—prioritizing dignity, accountability, and measurable impact.</p>
+
+      <div class="grid grid-3" style="margin-top: 1rem;">
+        <div class="card">
+          <h3>Education access</h3>
+          <p class="muted">Scholarships, after-school programs, and digital literacy initiatives for under-resourced students.</p>
+          <span class="chip">Goal: 5,000 students</span>
+        </div>
+        <div class="card">
+          <h3>Community health</h3>
+          <p class="muted">Mobile clinics, maternal health workshops, and nutrition support for vulnerable families.</p>
+          <span class="chip">Goal: 25 clinics</span>
+        </div>
+        <div class="card">
+          <h3>Climate resilience</h3>
+          <p class="muted">Clean water, tree planting, and sustainable agriculture training to protect livelihoods.</p>
+          <span class="chip">Goal: 100k trees</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming events -->
+  <section id="events">
+    <div class="wrap">
+      <h2 class="section-title">Upcoming events</h2>
+      <p class="muted">Join us at community drives, workshops, and fundraisers. Every event is an opportunity to connect and contribute.</p>
+
+      <div class="grid grid-3" style="margin-top: 1rem;">
+        <div class="card">
+          <h3>Health camp – Modinagar</h3>
+          <p class="muted">Free check-ups and health education. Volunteers needed for registration and logistics.</p>
+          <div class="chip">Jan 18</div>
+        </div>
+        <div class="card">
+          <h3>Book drive – Ghaziabad</h3>
+          <p class="muted">Collect and distribute textbooks for government schools. Sorting, packing, and delivery teams.</p>
+          <div class="chip">Feb 02</div>
+        </div>
+        <div class="card">
+          <h3>Tree planting – Meerut</h3>
+          <p class="muted">Support urban greening with local residents. Tools and saplings provided.</p>
+          <div class="chip">Feb 16</div>
+        </div>
+      </div>
+
+      <div class="note" style="margin-top: 1rem;">
+        Event details may change due to weather and local coordination. Please register to receive updates.
+      </div>
+    </div>
+  </section>
+
+  <!-- Donation options -->
+  <section id="donate">
+    <div class="wrap">
+      <h2 class="section-title">Donation options</h2>
+      <p class="muted">Choose a one-time gift or become a monthly supporter. Your contribution funds programs where they’re needed most.</p>
+
+      <div class="grid grid-2" style="margin-top: 1rem;">
+        <div class="card">
+          <h3>Quick amounts</h3>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button class="btn" data-amount="500">₹500</button>
+            <button class="btn" data-amount="1000">₹1,000</button>
+            <button class="btn" data-amount="2500">₹2,500</button>
+            <button class="btn" data-amount="5000">₹5,000</button>
+          </div>
+          <p class="secure-note" style="margin-top:0.5rem;">Secure payment processed via your preferred gateway.</p>
+        </div>
+
+        <div class="card">
+          <h3>Donate</h3>
+          <form class="donate-form" id="donateForm">
+            <div class="field">
+              <label for="donorName">Full name</label>
+              <input id="donorName" name="donorName" type="text" placeholder="Your name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+            <div class="field">
+              <label for="amount">Amount (INR)</label>
+              <input id="amount" name="amount" type="number" min="100" step="100" placeholder="1000" required />
+            </div>
+            <div class="field">
+              <label for="frequency">Frequency</label>
+              <select id="frequency" name="frequency">
+                <option value="one-time">One-time</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Proceed to payment</button>
+            <p class="secure-note">Note: Replace this demo form with your payment gateway integration (e.g., Razorpay, Stripe).</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Volunteer opportunities -->
+  <section id="volunteer">
+    <div class="wrap">
+      <h2 class="section-title">Volunteer opportunities</h2>
+      <p class="muted">Bring your talents to the field. Whether you’re free on weekends or remote on weekdays, we’ll find a way to plug you in.</p>
+
+      <div class="grid grid-2" style="margin-top: 1rem;">
+        <div class="card">
+          <h3>Current roles</h3>
+          <div class="vol-list">
+            <div class="vol-item">
+              <div class="icon">A</div>
+              <div>
+                <strong>Admin & logistics</strong>
+                <p class="muted">Event registration, inventory, and on-ground coordination.</p>
+              </div>
+            </div>
+            <div class="vol-item">
+              <div class="icon">T</div>
+              <div>
+                <strong>Tutoring</strong>
+                <p class="muted">After-school literacy and math support for grades 4–8.</p>
+              </div>
+            </div>
+            <div class="vol-item">
+              <div class="icon">H</div>
+              <div>
+                <strong>Health outreach</strong>
+                <p class="muted">Assist with screenings and wellness education in camps.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Register to volunteer</h3>
+          <form id="volunteerForm" class="donate-form">
+            <div class="field">
+              <label for="volName">Full name</label>
+              <input id="volName" name="volName" type="text" placeholder="Your name" required />
+            </div>
+            <div class="field">
+              <label for="volEmail">Email</label>
+              <input id="volEmail" name="volEmail" type="email" placeholder="you@example.com" required />
+            </div>
+            <div class="field">
+              <label for="interest">Area of interest</label>
+              <select id="interest" name="interest" required>
+                <option value="">Select</option>
+                <option>Admin & logistics</option>
+                <option>Tutoring</option>
+                <option>Health outreach</option>
+                <option>Fundraising</option>
+                <option>Social media</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <p class="secure-note">We’ll contact you within 3–5 business days.</p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Picture 2 -->
+      <div class="wrap" style="margin-top: 2rem;">
+        <img src="gallery.jpg" alt="Volunteers collaborating during a community event" style="border-radius: 14px; border:1px solid #e5eaf0;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="wrap">
+      <h2 class="section-title">Contact</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Get in touch</h3>
+          <p class="muted">Email: hello@hopeworks.example • Phone: +91-99999-00000</p>
+          <p class="muted">Address: 2nd Floor, Community Center, Modinagar, Uttar Pradesh</p>
+        </div>
+        <div class="card">
+          <h3>Stay updated</h3>
+          <p class="muted">Subscribe to our newsletter for stories from the field and event updates.</p>
+          <form id="subscribeForm" class="donate-form">
+            <div class="field">
+              <label for="subEmail">Email</label>
+              <input id="subEmail" name="subEmail" type="email" placeholder="you@example.com" required />
+            </div>
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">HopeWorks Foundation</div>
+        <p class="small subtle">Registered non-profit. PAN/12A/80G available upon request.</p>
+        <p class="small subtle">© <span id="year"></span> HopeWorks. All rights reserved.</p>
+      </div>
+      <div>
+        <div class="small">Quick links</div>
+        <p class="small"><a href="#mission">Mission</a> · <a href="#events">Events</a> · <a href="#donate">Donate</a> · <a href="#volunteer">Volunteer</a></p>
+      </div>
+      <div>
+        <div class="small">Follow</div>
+        <p class="small"><a href="#">Facebook</a> · <a href="#">Instagram</a> · <a href="#">LinkedIn</a></p>
+      </div>
+    </div>
+    <div class="footer-bar">Built with care and transparency.</div>
+  </footer>
+
+  <script>
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Quick amount buttons -> fill amount field
+    document.querySelectorAll('[data-amount]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const amountInput = document.getElementById('amount');
+        amountInput.value = btn.getAttribute('data-amount');
+        amountInput.focus();
+      });
+    });
+
+    // Demo submit handlers (replace with real integrations)
+    function toast(msg) {
+      alert(msg);
+    }
+    document.getElementById('donateForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const amt = document.getElementById('amount').value;
+      toast(`Redirecting to payment for ₹${amt}. Integrate your gateway here.`);
+    });
+    document.getElementById('volunteerForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      toast('Thanks for volunteering! We will reach out soon.');
+    });
+    document.getElementById('subscribeForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      toast('Subscription successful. Check your inbox for confirmation.');
+    });
+  </script>
+</body>
+</html>
